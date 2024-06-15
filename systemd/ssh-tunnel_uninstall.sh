@@ -8,7 +8,7 @@
 SERVICEDIR="/etc/systemd/system"
 
 #serviceファイル名
-SERVICEFILE="ssh-tunnel.service"
+SERVICEFILE="ssh-tunnel-main.service"
 
 
 
