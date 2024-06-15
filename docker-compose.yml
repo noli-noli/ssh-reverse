@@ -6,24 +6,22 @@ services:
       context: .
       dockerfile: dockerfile
       #dockerfileにproxyアドレスを引数として渡す
-      args:
-        - http_tmp=$http_proxy
-        - https_tmp=$https_proxy
-    #カレントディレクトリ上にあるET-BERTをコンテナ内の/ET-BERTにマウント
-    #volumes:
-    #  - ./workspace:/home/user
-    #ワーキングディレクトリを/workspaceに設定
-    #working_dir: /home/user
-    #コンテナ内でbashを起動
+      #args:
+      #  - http_tmp=$http_proxy
+      #  - https_tmp=$https_proxy
+    
     privileged: true
     tty: true
+
+    #コンテナ内でsystemdを起動
     command: /sbin/init
+
     #proxyアドレスを読込む
     env_file:
-      - proxy.env
+      - .env
     ports:
       #SSHポート番号
-      - "49200:22"
+      - "22:22"
       #外部に公開するsshポート番号
       - "49201:49201"
       - "49202:49202"
