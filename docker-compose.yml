@@ -6,23 +6,22 @@ services:
       context: .
       dockerfile: dockerfile
       #dockerfileにproxyアドレスを引数として渡す
-      #args:
-      #  - http_tmp=$http_proxy
-      #  - https_tmp=$https_proxy
-    
+      args:
+        - http_tmp=$http_proxy
+        - https_tmp=$https_proxy
+
     privileged: true
     tty: true
-
-    #コンテナ内でsystemdを起動
+    #systemdを起動する
     command: /sbin/init
-
     #proxyアドレスを読込む
     env_file:
-      - .env
+      - env
     ports:
       #SSHポート番号
       - "22:22"
       #外部に公開するsshポート番号
+      - "8080:8080"
       - "49201:49201"
       - "49202:49202"
       - "49203:49203"
