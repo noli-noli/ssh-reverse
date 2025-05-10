@@ -16,7 +16,7 @@ services:
     command: /sbin/init
     #proxyアドレスを読込む
     env_file:
-      - env
+      - .env
     ports:
       #SSHポート番号
       - "22:22"
