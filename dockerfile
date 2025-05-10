@@ -41,6 +41,8 @@ RUN chmod 700 /home/user/.ssh
 #sshdの設定
 RUN printf "Match User user\n\tChrootDirectory /home/user\n\tAllowTcpForwarding yes\n\tX11Forwarding no\n\tGatewayPorts yes" >> /etc/ssh/sshd_config
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+RUN printf "\n\n#Destroying a disconnected session\n" >> /etc/ssh/sshd_config
+RUN printf "ClientAliveInterval 30\nClientAliveCountMax 3\n" >> /etc/ssh/sshd_config
 
 #sshの有効化
 RUN systemctl enable ssh
